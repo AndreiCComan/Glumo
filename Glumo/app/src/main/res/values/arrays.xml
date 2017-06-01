@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Preference section -->
+    <string-array name="update_asynchronously_data_frequency_preference">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+    </string-array>
+    <string-array name="selected_sensor_preference">
+        <item>@string/freestyle_libre_sensor_name</item>
+    </string-array>
+    <string-array name="diabetes_type_preference">
+        <item>@string/diabetes_type_1</item>
+    </string-array>
+    <string-array name="backup_data_sync_frequency_preference">
+        <item>1</item>
+        <item>6</item>
+        <item>12</item>
+        <item>24</item>
+    </string-array>
+
+    <!-- General tips on diabetes and company -->
+    <string-array name="tips_array">
+        <item>Physical exercise, in both medium and long term, increases the efficiency of insulin, implying the necessity of corrections and changes in the doses.</item>
+        <item>A particularly long and intense physical exercise might lead to tardive forms of hypoglycemia during the following night. Thus, modifications in the doses should be taken into consideration.</item>
+        <item>Stress and illness make insulin less efficient, thus the imply stronger doses. During the illness period, the patient should increase the medical checks. Even without eating, it is always necessary to take insulin.</item>
+        <item>The glycemic index indicates the impact of a certain quantity of carbohydrates on the glycemia. It is important to be aware of which types of food have high, medium or low glycemic index, attempting to have balanced meals under this point of view.</item>
+        <item>The dose of insulin related to a certain meal can be divided in two or more consumptions. This \'double\' or \'multiple\' bolus is useful when the meal lasts for a very long time, when the dishes that will be served are not formerly known, and when the patient is not sure he will be having the full meal.</item>
+        <item>Hyperglycemia with no food (i.e. not during the three hours that follow a meal) must be handled with a dose of insulin, and it is crucial to share the issue and the possibile solutions with the diabetologist.</item>
+        <item>Postprandial hyperglycemia (PPHG) must be handled only if particulary relevant, or if it is possibile to evaluate with precision the quantity of insulin supplied before the meal still contained in the cyrculatory system.</item>
+        <item>It is crucial to keep a glycemic diary, both for getting used with carbohydrates calculations and for adapting regularly the insulin/carbohydrates factor with the diabetologist.</item>
+        <item>Diabetes does not force you to eat in a certain way, it only requires you to be aware of what you\'re eating. Our body has its rythms: we all need to understand them and respect them.</item>
+        <item>A food diary that keeps track of what the person is eating, how many units of insulin have been supplied and the glycemic level before and two hours after the meal becomes and extremely useful source for solutions.</item>
+        <item>Keep Eating Habits Consistent; skipping meals, especially breakfast, could push your blood sugar higher, and depending which blood glucose-lowering medications you take, could cause hypoglycemia (low blood sugar).</item>
+    </string-array>
+
+</resources>

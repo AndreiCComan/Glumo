@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widget_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionGroup="true"
+    android:background="@drawable/widget_gradient"
+    tools:context=".activity.AppWidgetProviderActivity">
+
+    <!-- Glucose level indicator -->
+    <LinearLayout
+        android:id="@+id/glucose_level_container_widget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/glucose_level_widget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="0"
+            android:textColor="@android:color/white"
+            android:textSize="50sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp">
+
+            <RelativeLayout
+                android:layout_width="25dp"
+                android:layout_height="25dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/arrow_glucose_widget"
+                    android:rotation="0"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/arrow_glucose" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/arrow_glucose_widget_p45"
+                    android:visibility="gone"
+                    android:rotation="45"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/arrow_glucose" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/arrow_glucose_widget_n45"
+                    android:visibility="gone"
+                    android:rotation="-45"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/arrow_glucose" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/glucose_unit"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

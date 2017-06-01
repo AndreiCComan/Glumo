@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
+    android:id="@+id/prova"
+    app:cardCornerRadius="4dp">
+
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:dragEdge="left"
+        app:mode="same_level">
+
+        <RelativeLayout
+            android:id="@+id/delete_layout"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@color/ALIZARIN"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/delete_food_item_bin"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/garbage" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            app:cardCornerRadius="4dp">
+
+            <TextView
+                android:id="@+id/food_item_in_list_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="sans-serif-light"
+                android:gravity="left|center_vertical"
+                android:lines="3"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/food_item_in_list_name_grams"
+                    android:background="@color/PETER_RIVER"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="2dp"
+                    android:includeFontPadding="true"/>
+                <TextView
+                    android:id="@+id/food_item_in_list_name_carbohydrates"
+                    android:background="@color/BELIZE_HOLE"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+        </LinearLayout>
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
+</android.support.v7.widget.CardView>

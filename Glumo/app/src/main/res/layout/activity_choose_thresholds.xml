@@ -1,0 +1,105 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:keepScreenOn="true"
+    tools:context="glumo.com.glumo.activity.ChooseThresholdsActivity">
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/choose_thresholds_activity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-light"
+        android:lines="2"
+        android:text="@string/choose_thresholds_activity_title"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/hyperglycemia_title"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <com.lantouzi.wheelview.WheelView
+                android:id="@+id/hyperglycemia_wheel_view"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                app:lwvHighlightColor="@color/WET_ASPHALT"
+                app:lwvIntervalFactor="2"
+                app:lwvMarkRatio="0.5"
+                app:lwvMarkTextColor="@android:color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/hypoglycemia_title"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <com.lantouzi.wheelview.WheelView
+                android:id="@+id/hypoglycemia_wheel_view"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                app:lwvHighlightColor="@color/WET_ASPHALT"
+                app:lwvIntervalFactor="2"
+                app:lwvMarkRatio="0.5"
+                app:lwvMarkTextColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/choose_thresholds_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/button_rounded_corners"
+        android:padding="10dp"
+        android:text="@string/choose_thresholds_button"
+        android:textAllCaps="false"
+        android:textColor="@drawable/button_rounded_corners_text"
+        android:textSize="15sp" />
+</RelativeLayout>

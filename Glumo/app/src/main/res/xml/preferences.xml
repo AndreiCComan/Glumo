@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Preference
+        android:defaultValue="false"
+        android:key="@string/first_configuration_completed" />
+    <PreferenceCategory
+        android:key="@string/general_preference_category"
+        android:title="@string/general_preference_category">
+        <ListPreference
+            android:entries="@array/selected_sensor_preference"
+            android:entryValues="@array/selected_sensor_preference"
+            android:key="@string/selected_sensor_preference"
+            android:summary="%s"
+            android:title="@string/selected_sensor_preference" />
+        <Preference
+            android:defaultValue="null"
+            android:key="@string/paired_device_preference"
+            android:summary="%s"
+            android:title="@string/paired_device_preference" />
+        <RingtonePreference
+            android:defaultValue="content://settings/system/alarm_alert"
+            android:key="@string/ringtone_alarm_preference"
+            android:ringtoneType="alarm"
+            android:summary="%s"
+            android:title="@string/ringtone_alarm_preference" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/shake_phone_to_make_read_switch_preference"
+            android:title="@string/shake_phone_to_make_read_switch_preference" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/energy_save_mode_switch_preference"
+            android:title="@string/energy_save_mode_switch_preference" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/update_asynchronously_data_frequency_switch_preference"
+            android:title="@string/update_asynchronously_data_frequency_switch_preference" />
+        <ListPreference
+            android:defaultValue="15"
+            android:dependency="@string/update_asynchronously_data_frequency_switch_preference"
+            android:entries="@array/update_asynchronously_data_frequency_preference"
+            android:entryValues="@array/update_asynchronously_data_frequency_preference"
+            android:key="@string/update_asynchronously_data_frequency_preference"
+            android:summary="%s"
+            android:title="@string/update_asynchronously_data_frequency_preference" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/diabetes_preference_category"
+        android:title="@string/diabetes_preference_category">
+        <ListPreference
+            android:entries="@array/diabetes_type_preference"
+            android:entryValues="@array/diabetes_type_preference"
+            android:key="@string/diabetes_type_preference"
+            android:summary="%s"
+            android:title="@string/diabetes_type_preference" />
+        <glumo.com.glumo.object.NumberPickerPreference
+            android:key="@string/hyperglycemia_preference"
+            android:summary="%s"
+            android:title="@string/hyperglycemia_preference"
+            app:maxValue="400"
+            app:minValue="1"
+            app:wrapSelectorWheel="true" />
+        <glumo.com.glumo.object.NumberPickerPreference
+            android:key="@string/hypoglycemia_preference"
+            android:summary="%s"
+            android:title="@string/hypoglycemia_preference"
+            app:maxValue="400"
+            app:minValue="1"
+            app:wrapSelectorWheel="true" />
+        <glumo.com.glumo.object.NumberPickerPreference
+            android:defaultValue="20"
+            android:key="@string/ic_ratio_preference"
+            android:summary="%s"
+            android:title="@string/ic_ratio_preference"
+            app:maxValue="50"
+            app:minValue="1"
+            app:wrapSelectorWheel="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/alarm_preference_category"
+        android:title="@string/alarm_preference_category">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/alarm_SMS_switch_preference"
+            android:title="@string/alarm_SMS_switch_preference" />
+        <EditTextPreference
+            android:defaultValue="not assigned yet"
+            android:dependency="@string/alarm_SMS_switch_preference"
+            android:inputType="phone"
+            android:key="@string/alarm_SMS_message_recipient_number_preference"
+            android:summary="%s"
+            android:title="@string/alarm_SMS_message_recipient_number_preference" />
+        <EditTextPreference
+            android:defaultValue="@string/alarm_SMS_message_default_text"
+            android:dependency="@string/alarm_SMS_switch_preference"
+            android:inputType="text"
+            android:key="@string/alarm_SMS_message_default_text"
+            android:summary="%s"
+            android:title="@string/alarm_SMS_message_text_preference" />
+        <glumo.com.glumo.object.NumberPickerPreference
+            android:defaultValue="3"
+            android:dependency="@string/alarm_SMS_switch_preference"
+            android:key="@string/unacknowledged_notifications_alarm_threshold_preference"
+            android:summary="%s"
+            android:title="@string/unacknowledged_notifications_alarm_threshold_preference"
+            app:maxValue="10"
+            app:minValue="1"
+            app:wrapSelectorWheel="true" />
+    </PreferenceCategory>
+
+    <!-- because, for now, backup is not implemented <PreferenceCategory
+        android:key="@string/backup_data_preference_category"
+        android:title="@string/backup_data_preference_category">
+        <Preference
+            android:key="@string/backup_data_last_backup_preference"
+            android:summary="19-04-2017 15:32"
+            android:title="@string/backup_data_last_backup_preference" />
+        <ListPreference
+            android:defaultValue="3"
+            android:entries="@array/backup_data_sync_frequency_preference"
+            android:entryValues="@array/backup_data_sync_frequency_preference"
+            android:key="@string/backup_data_sync_frequency_preference"
+            android:summary="%s"
+            android:title="@string/backup_data_sync_frequency_preference" />
+    </PreferenceCategory>-->
+    <PreferenceCategory
+        android:key="@string/theme_preference_category"
+        android:title="@string/theme_preference_category">
+        <com.thebluealliance.spectrum.SpectrumPreference
+            android:defaultValue="@color/PINK_THEME"
+            android:key="@string/theme_color"
+            android:title="@string/theme_color"
+            app:spectrum_colors="@array/flat_ui_light" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/app_version_category"
+        android:title="@string/app_version_category">
+        <Preference
+            android:key="@string/app_version_preference"
+            android:summary="@string/app_version_summary"
+            android:title="@string/app_version_preference" />
+    </PreferenceCategory>
+</PreferenceScreen>

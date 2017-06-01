@@ -1,0 +1,222 @@
+<resources>
+    <string name="app_name">Glumo</string>
+
+    <!-- PREFERENCE SECTION -->
+    <string name="first_configuration_completed">first_configuration_completed</string>
+
+    <string name="general_preference_category">GENERAL</string>
+    <string name="selected_sensor_preference">Selected sensor</string>
+    <string name="freestyle_libre_sensor_name">FreeStyle Libre</string>
+    <string name="paired_device_preference">Paired device</string>
+    <string name="ringtone_alarm_preference">Notification alarm sound</string>
+    <string name="shake_phone_to_make_read_switch_preference">Shake phone to make glucose read</string>
+    <string name="energy_save_mode_switch_preference">Enable energy save mode</string>
+    <string name="update_asynchronously_data_frequency_switch_preference">Enable in background glucose read</string>
+    <string name="update_asynchronously_data_frequency_preference">Update data frequency (min)</string>
+
+    <string name="diabetes_preference_category">DIABETES</string>
+    <string name="diabetes_type_preference" >Diabetes type</string>
+    <string name="diabetes_type_1" >Type 1 diabetes</string>
+    <string name="hyperglycemia_preference">Hyperglycemia</string>
+    <string name="hypoglycemia_preference">Hypoglycemia</string>
+    <string name="ic_ratio_preference" >I-Carb ratio (1 to)</string>
+
+    <string name="alarm_preference_category">SMS ALARM</string>
+    <string name="alarm_SMS_switch_preference">Enable emergency SMS alarm</string>
+    <string name="alarm_SMS_message_recipient_number_preference">SMS message recipient number</string>
+    <string name="alarm_SMS_message_text_preference">SMS message text</string>
+    <string name="alarm_SMS_message_default_text">GLUMO AUTOMATIC SOS MESSAGE : this person is diabetic, his glycemia is at critical level and he has not acknowledged the last alarms</string>
+    <string name="unacknowledged_notifications_alarm_threshold_preference">Ignored alarms notifications before sending SMS</string>
+
+    <string name="theme_preference_category">THEME</string>
+    <string name="theme_color">Theme Color</string>
+
+    <string name="backup_data_preference_category">BACKUP DATA</string>
+    <string name="backup_data_last_backup_preference">Last backup</string>
+    <string name="backup_data_sync_frequency_preference">Sync data frequency (hours)</string>
+
+    <string name="app_version_category">APP VERSION</string>
+    <string name="app_version_preference">Current version</string>
+    <string name="app_version_summary">v0.1 ALPHA</string>
+
+
+    <!-- Notifications -->
+    <string name="hypoglycemia">Hypoglycemia</string>
+    <string name="hyperglycemia">Hyperglycemia</string>
+    <string name="glicemy">Glicemy (</string>
+    <string name="glicemy_is_under_threshold">) is under threshold</string>
+    <string name="glicemy_is_above_threshold">) is above threshold</string>
+    <string name="notification_unreachable_device_title">Attention: Glucometer unreachable</string>
+    <string name="notification_unreachable_device_text">Glucose not updated; Check device status</string>
+    <string name="notification_not_selected_device_title">Attention: Glucometer not selected yet</string>
+    <string name="notification_not_selected_device_text">Go to settigs and choose a glucose sensor</string>
+    <string name="notification_read_value_title">Last read value</string>
+
+    <!-- Strings for accessibility reasons -->
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- Navigation Drawer menu labels -->
+    <string name="drawer_home">Home</string>
+    <string name="drawer_analysis">Analysis</string>
+    <string name="drawer_bolus_calculator">Bolus calculator</string>
+    <string name="drawer_carbohydrate_checker">Carbohydrate checker</string>
+    <string name="drawer_settings">Settings</string>
+    <string name="drawer_credits">Credits</string>
+    <string name="drawer_backup_data">Backup data</string>
+    <string name="drawer_backup_data_dropbox">Backup data with Dropbox</string>
+    <string name="drawer_backup_data_drive">Backup data with Drive</string>
+    <string name="drawer_backup_data_local_storage">Backup data in Local Storage</string>
+
+    <!-- Getting Started activity section -->
+    <string name="getting_started_activity_title">Welcome to Glumo</string>
+    <string name="getting_started_description">The following screens will guide you through some simple steps of configuration for this app. \n \nNote that Glumo provides a service of asynchronous data retrieval from your sensor, i.e.: reading values in background at regulars intervals. \n \nThis function can be enabled, disabled and handled at any time from the settings page.</string>
+    <string name="getting_started_button">start first configuration</string>
+
+    <!-- Emergency message activity section -->
+    <string name="emergency_message_activity_title">Emergency message</string>
+    <string name="emergency_message_description">If your glycemia is at danger level with respect to your thresholds, an alarm notification will be issued. \n \nIf you do not acknowledge a certain number of these notifications, the application will assume you are in danger, and will send an emergency SMS to a chosen number with a default text message. \n \nYou will be able to change settings later. \n \nDo you want to enable this feature ( you will have to set the number in the settings ) ?</string>
+    <string name="emergency_message_accept">yes of course</string>
+    <string name="emergency_message_decline">maybe later</string>
+
+    <!-- Choose diabetes type activity section -->
+    <string name="choose_diabetes_type_activity_title">WHAT TYPE OF \n DIABETES DO YOU HAVE?</string>
+    <string name="choose_diabetes_type_button">choose diabetes type</string>
+    <string name="type_1_diabetes">Type 1 diabetes</string>
+    <string name="type_2_diabetes">Type 2 diabetes</string>
+    <string name="gestational_diabetes">Gestational diabetes</string>
+
+    <!-- Choose sensor activity section-->
+    <string name="choose_sensor_button">choose sensor</string>
+    <string name="choose_sensor_activity_title">CHOOSE YOUR SENSOR</string>
+    <string name="freestyle_libre">FreeStyle Libre</string>
+
+    <!-- Choose thresholds activity section -->
+    <string name="choose_thresholds_activity_title">CHOOSE THRESHOLDS</string>
+    <string name="choose_thresholds_button">choose thresholds</string>
+    <string name="hyperglycemia_title">Hyperglycemia</string>
+    <string name="hypoglycemia_title">Hypoglycemia</string>
+    <string name="choose_thresholds_activity_error_message">Not consistent values!</string>
+
+    <!-- Bluetooth choose device activity section -->
+    <string name="bluetooth_choose_device_activity_title">Bluetooth reading mode</string>
+    <string name="bluetooth_choose_device_description">Choose from the list below your sensor device. If you are not able to see it please check your paired devices within Android Settings, and if it is the case pair your sensor with the smartpone</string>
+    <string name="bluetooth_choose_device_list_devices_title">List of paired devices:</string>
+    <string name="bluetooth_choose_device_do_it_later_button">maybe later</string>
+    <string name="bluetooth_choose_device_choose_button">choose device</string>
+    <string name="bluetooth_choose_device_bluetooth_not_supported_alert">Your device does not support bluetooth...\nYou will not able to use most of the app functionalities</string>
+    <string name="bluetooth_choose_device_no_paired_devices_alert">NO PAIRED DEVICES \n please go to system bluetooth settings and then pair your device. Eventually come back here, we\'ll wait you</string>
+
+    <!-- end of first configurationactivity section -->
+    <string name="end_of_first_configuration_activity_title">WELL DONE!</string>
+    <string name="end_of_first_configuration_description">The configuration has been successfully completed \n\nEnjoy!</string>
+    <string name="end_of_first_configuration_button">complete</string>
+    <string name="hurray">Hurray!</string>
+
+    <!-- Easter egg activity section -->
+    <string name="easter_egg_activity_title">AW, SNAP!</string>
+    <string name="easter_egg_activity_description">You found our secret spot!</string>
+    <string name="go_back_button">go back</string>
+
+    <!-- Main Activity section -->
+    <string name="shake_dialog_title">Shake your phone!</string>
+    <string name="shake_dialog_text_disabled">You can shake your phone in order to manually refresh the last read, until you close the app.\nGo to settings to enable this cool functionality.</string>
+    <string name="shake_dialog_text_enabled">Now you can shake your phone to refresh the last read, until you close the app. Enjoy!</string>
+    <string name="shake_dialog_button">GOTCHA</string>
+
+    <!-- Home section -->
+    <string name="average_value">Average value</string>
+    <string name="minimum_value">Minumum value</string>
+    <string name="maximum_value">Maximum value</string>
+    <string name="blood_sugar_line_chart">Today\'s chart</string>
+    <string name="today_log">Last 2 hours log</string>
+
+    <!-- Analysis section -->
+    <string name="analysis_period_today">24 hours</string>
+    <string name="analysis_period_week">7 days</string>
+    <string name="analysis_period_month">30 days</string>
+    <string name="times_in_hypoglycemia">Times in hypo</string>
+    <string name="times_in_hyperglycemia">Times in hyper</string>
+    <string name="line_chart_title">Zoomable line chart</string>
+    <string name="card_logs_title">Glucose value logs</string>
+
+    <!-- Credits section -->
+    <string name="credits_subtitle">Contributors</string>
+    <string name="credits_developers">Developers</string>
+    <string name="credits_developer_giacomo">Giacomo Zara</string>
+    <string name="credits_developer_stefano">Stefano Berlato</string>
+    <string name="credits_developer_andrei">Andrei C. Coman</string>
+    <string name="credits_quote">In open source, we feel strongly that to really do something well, you have to get a lot of people involved.</string>
+    <string name="quote_author">Linus Torvalds</string>
+    <string name="thanks_to_flaticon">Special thanks goes to Flaticon</string>
+    <string name="thanks_for_libraries">Glumo was made possible\nthanks to these libraries</string>
+    <string name="github_repository_title">GitHub repository</string>
+    <string name="github_repository_link">https://github.com/Glumo/Glumo</string>
+    <string name="flaticon_thanks">Special thanks goes to Flaticon</string>
+    <string name="flaticon_link">http://www.flaticon.com/</string>
+    <string name="flaticon_icon_authors">and all the icon authors</string>
+
+    <!-- Carbohydrate checker section -->
+    <string name="search_item_placeholder">Enter aliment name</string>
+    <string name="speech_prompt">Say something!</string>
+    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
+    <string name="no_internet_connection">Sorry! It seems you are not connected to a network</string>
+    <string name="no_search_results">Sorry! No item found</string>
+    <string name="item_added_to_list">Item was added to list</string>
+    <string name="item_updated_within_list">Item within list was updated</string>
+    <string name="essential_nutrients_title">Essential nutrients (per 100 grams)</string>
+    <string name="carbohydrates_nutrient">Carbohydrates</string>
+    <string name="fat_nutrient">Fat</string>
+    <string name="protein_nutrient">Protein</string>
+    <string name="quantity_grams">quantity (grams)</string>
+    <string name="add_to_meal_button">ADD TO MEAL</string>
+    <string name="go_to_bolus_calculator_button">go to bolus calculator</string>
+    <string name="not_so_scary">I am not so scary...</string>
+    <string name="total_carbohydrates">Total carbohydrates</string>
+    <string name="start_total_carbohydrates_value">0.00</string>
+    <string name="default_value_for_items_in_list">0 items in list</string>
+
+    <!-- Bolus calculator section -->
+    <string name="did_you_know">Did you know that?</string>
+    <string name="icarb_ration">I-Carb ratio</string>
+    <string name="calculate_insulin_units_button">calculate insulin units</string>
+    <string name="enter_carbohydrates_hint">Enter carbohydrates value</string>
+
+    <!-- Backup fragments section -->
+    <string name="continue_with_local_storage">continue with Local Storage</string>
+    <string name="continue_with_dropbox">continue with Dropbox</string>
+    <string name="continue_with_drive">continue with Drive</string>
+    <string name="import_data_backup_button">import data</string>
+    <string name="export_data_backup_button">export data</string>
+    <string name="backup_hang_on">Hang on...</string>
+
+    <string name="local_storage_backup_title">Local Storage</string>
+
+    <string name="dropbox_backup_title">Dropbox</string>
+
+    <string name="drive_backup_title">Drive</string>
+    <string name="drive_backup_error">An error occurred, try again</string>
+    <string name="drive_backup_error_request_canceled">Request canceled</string>
+    <string name="drive_backup_error_no_account_selected">No account selected</string>
+    <string name="drive_backup_request_google_play_services">This backup functionality requires Google Play Services. Please install Google Play Services on your device and try again.</string>
+
+    <!-- Miscellaneous -->
+    <string name="no_data">no data</string>
+    <string name="glucose_unit">mg/dL</string>
+    <string name="unit_of_insulin">unit of insulin</string>
+    <string name="units_of_insulin">units of insulin</string>
+    <string name="item_in_list">item in list</string>
+    <string name="items_in_list">items in list</string>
+    <string name="clicks_to_easter_egg">more clicks to become a developer</string>
+    <string name="grams_unit">g</string>
+    <string name="dialog_import_data_question">Are you sure about performing data recovery with this file?\nBy clicking "Yes" all previous content will be erased</string>
+    <string name="dialog_import_data_confirm">Yes</string>
+    <string name="dialog_import_data_decline">No</string>
+    <string name="file_import_success">Success! Data has been correctly imported</string>
+    <string name="file_import_fail">Error! File or data corrupted</string>
+    <string name="file_export_success">Success! Data has been correctly exported</string>
+    <string name="file_export_fail">Warning! Something went wrong with the export</string>
+    <string name="no_csv_files_found">Warning! No CSV files found</string>
+    <string name="data_corrupted">Data corrupted!</string>
+    <string name="data_in_database_corrupted">Data in database corrupted!</string>
+</resources>

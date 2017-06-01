@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Gradient default-->
+    <color name="gradient_start_color">@color/ALIZARIN</color>
+    <color name="gradient_end_color">@color/PINK_THEME</color>
+
+    <!-- Dropbox Blue -->
+    <color name="dropbox_blue">#007EE5</color>
+
+    <!-- Drive Color -->
+    <color name="google_drive_color">@color/ORANGE</color>
+
+    <!-- Flat UI colors http://flatuicolors.com/ -->
+    <color name="TURQUOISE">#1abc9c</color>
+    <color name="EMERALD">#2ecc71</color>
+    <color name="PETER_RIVER">#3498db</color>
+    <color name="AMETHYST">#9b59b6</color>
+    <color name="WET_ASPHALT">#34495e</color>
+    <color name="GREEN_SEA">#16a085</color>
+    <color name="NEPHRITIS">#27ae60</color>
+    <color name="BELIZE_HOLE">#2980b9</color>
+    <color name="WISTERIA">#8e44ad</color>
+    <color name="MIDNIGHT_BLUE">#2c3e50</color>
+    <color name="SUN_FLOWER">#f1c40f</color>
+    <color name="CARROT">#e67e22</color>
+    <color name="ALIZARIN">#e74c3c</color>
+    <color name="CLOUDS">#ecf0f1</color>
+    <color name="CONCRETE">#95a5a6</color>
+    <color name="ORANGE">#f39c12</color>
+    <color name="PUMPKIN">#d35400</color>
+    <color name="POMEGRANATE">#c0392b</color>
+    <color name="SILVER">#bdc3c7</color>
+    <color name="ASBESTOS">#7f8c8d</color>
+    <color name="PINK_THEME">#DE62C8</color>
+
+    <!-- Theme colors -->
+    <color name="colorPrimary">@color/ALIZARIN</color>
+    <color name="colorPrimaryDark">@color/POMEGRANATE</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- Flat colors -->
+    <color name="flat_green_light">@color/TURQUOISE</color>
+    <color name="flat_orange_light">@color/CARROT</color>
+    <color name="flat_red_light">@color/ALIZARIN</color>
+
+    <!-- For color picker -->
+    <array name="flat_ui_light">
+        <item>@color/TURQUOISE</item>
+        <item>@color/EMERALD</item>
+        <item>@color/PETER_RIVER</item>
+        <item>@color/AMETHYST</item>
+        <item>@color/WET_ASPHALT</item>
+        <item>@color/SUN_FLOWER</item>
+        <item>@color/CARROT</item>
+        <item>@color/ALIZARIN</item>
+        <item>@color/gradient_end_color</item>
+        <item>@color/CONCRETE</item>
+    </array>
+
+    <array name="flat_ui_dark">
+        <item>@color/GREEN_SEA</item>
+        <item>@color/NEPHRITIS</item>
+        <item>@color/BELIZE_HOLE</item>
+        <item>@color/WISTERIA</item>
+        <item>@color/MIDNIGHT_BLUE</item>
+        <item>@color/ORANGE</item>
+        <item>@color/PUMPKIN</item>
+        <item>@color/POMEGRANATE</item>
+        <item>@color/SILVER</item>
+        <item>@color/ASBESTOS</item>
+    </array>
+
+</resources>

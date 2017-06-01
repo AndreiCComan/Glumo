@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_home"
+            android:checked="true"
+            android:icon="@drawable/home"
+            android:title="@string/drawer_home" />
+        <item
+            android:id="@+id/drawer_analysis"
+            android:icon="@drawable/analysis"
+            android:title="@string/drawer_analysis" />
+        <item
+            android:id="@+id/drawer_bolus_calculator"
+            android:icon="@drawable/bolus_calculator"
+            android:title="@string/drawer_bolus_calculator" />
+        <item
+            android:id="@+id/drawer_carbohydrate_checker"
+            android:icon="@drawable/carbohydrate_checker"
+            android:title="@string/drawer_carbohydrate_checker" />
+        <item
+            android:id="@+id/drawer_settings"
+            android:icon="@drawable/settings"
+            android:title="@string/drawer_settings" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_backup_local_storage"
+            android:icon="@drawable/local_storage_small_logo"
+            android:title="@string/drawer_backup_data_local_storage" />
+        <item
+            android:id="@+id/drawer_backup_dropbox"
+            android:icon="@drawable/dropbox_small_logo"
+            android:title="@string/drawer_backup_data_dropbox" />
+        <item
+            android:id="@+id/drawer_backup_drive"
+            android:icon="@drawable/google_drive_small_logo"
+            android:title="@string/drawer_backup_data_drive" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_credits"
+            android:icon="@drawable/credits"
+            android:title="@string/drawer_credits" />
+    </group>
+</menu>
