@@ -150,6 +150,7 @@
     <string name="quote_author">Linus Torvalds</string>
     <string name="thanks_to_flaticon">Special thanks goes to Flaticon</string>
     <string name="thanks_for_libraries">Glumo was made possible\nthanks to these libraries</string>
+    <string name="thanks_to_USDA">Thanks USDA\nfor the food composition API</string>
     <string name="github_repository_title">GitHub repository</string>
     <string name="github_repository_link">https://github.com/Glumo/Glumo</string>
     <string name="flaticon_thanks">Special thanks goes to Flaticon</string>

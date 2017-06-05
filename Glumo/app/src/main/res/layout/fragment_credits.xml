@@ -264,6 +264,48 @@
                         android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@string/thanks_to_USDA"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:autoLink="web"
+                                android:text="https://ndb.nal.usda.gov/ndb/doc/"
+                                android:textAlignment="center"
+                                android:textColorLink="@color/PETER_RIVER" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="@string/thanks_for_libraries"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
@@ -375,7 +417,7 @@
                                 android:textAlignment="center"
                                 android:textColorLink="@color/PETER_RIVER" />
                         </LinearLayout>
-                        
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"

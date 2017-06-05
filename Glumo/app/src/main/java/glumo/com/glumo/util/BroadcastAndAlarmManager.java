@@ -29,17 +29,17 @@ import static android.content.Context.ALARM_SERVICE;
 import static android.os.SystemClock.elapsedRealtime;
 
 /**
- *  Our handler for Intents, that are :
- *  - BluetoothAdapter.ACTION_STATE_CHANGED (system broadcast)
- *  - Intent.ACTION_BOOT_COMPLETED (system broadcast)
- *  - GlumoApplication.BT_READ_GLUCOSE (directly addressed to this class)
- *  - GlumoApplication.BT_READ_GLUCOSE_R (directly addressed to this class)
- *  - GlumoApplication.BT_D_UNREACHABLE (directly addressed to this class)
- *  - GlumoApplication.BT_N_SELECTED_DEVICE (directly addressed to this class)
- *  - GlumoApplication.BAM_ALARM_NOTIFICATION_ACKNOWLEDGED (directly addressed to this class)
- *  - GlumoApplication.BAM_ALARM_NOTIFICATION_NOT_ACKNOWLEDGED (directly addressed to this class)
- *
- *  This class also manages alarms (SMS) and notifications
+ * Our handler for Intents, that are :
+ * - BluetoothAdapter.ACTION_STATE_CHANGED (system broadcast)
+ * - Intent.ACTION_BOOT_COMPLETED (system broadcast)
+ * - GlumoApplication.BT_READ_GLUCOSE (directly addressed to this class)
+ * - GlumoApplication.BT_READ_GLUCOSE_R (directly addressed to this class)
+ * - GlumoApplication.BT_D_UNREACHABLE (directly addressed to this class)
+ * - GlumoApplication.BT_N_SELECTED_DEVICE (directly addressed to this class)
+ * - GlumoApplication.BAM_ALARM_NOTIFICATION_ACKNOWLEDGED (directly addressed to this class)
+ * - GlumoApplication.BAM_ALARM_NOTIFICATION_NOT_ACKNOWLEDGED (directly addressed to this class)
+ * <p>
+ * This class also manages alarms (SMS) and notifications
  */
 public class BroadcastAndAlarmManager extends BroadcastReceiver {
 
@@ -59,8 +59,7 @@ public class BroadcastAndAlarmManager extends BroadcastReceiver {
                     final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
                     if (state == BluetoothAdapter.STATE_OFF) {      // BT_OFF
                         LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(GlumoApplication.BT_OFF));
-                    }
-                    else if (state == BluetoothAdapter.STATE_ON) {  // BT_ON
+                    } else if (state == BluetoothAdapter.STATE_ON) {  // BT_ON
                         LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(GlumoApplication.BT_ON));
                     }
                     break;
@@ -81,24 +80,21 @@ public class BroadcastAndAlarmManager extends BroadcastReceiver {
 
 
                 case GlumoApplication.BT_READ_GLUCOSE_R:    // received when a glucose lecture has been done
-                    MainActivity.afterGlucoseReadRequestResponse();
                     currentUnacknowledgedAlarmsNumber = 0;  // reset the unreachable tries cont
                     int value = Integer.valueOf(intent.getStringExtra(GlumoApplication.ET_GLUCOMETER_RESPONSE_TAG));
-                    int [] thresholds = {GlumoApplication.getIntPreference(R.string.hypoglycemia_preference), GlumoApplication.getIntPreference(R.string.hyperglycemia_preference)};
+                    int[] thresholds = {GlumoApplication.getIntPreference(R.string.hypoglycemia_preference), GlumoApplication.getIntPreference(R.string.hyperglycemia_preference)};
                     if (value <= thresholds[0]) {
                         sendNotificationAndAlarm(
                                 ctx.getString(R.string.hypoglycemia),
                                 ctx.getString(R.string.glicemy) + value + ctx.getString(R.string.glicemy_is_under_threshold),
                                 true);
-                    }
-                    else if (value >= thresholds[1]) {
+                    } else if (value >= thresholds[1]) {
                         sendNotificationAndAlarm(
                                 ctx.getString(R.string.hyperglycemia),
                                 ctx.getString(R.string.glicemy) + value + ctx.getString(R.string.glicemy_is_above_threshold),
                                 true);
-                    }
-                    else {
-                        sendReadNotification(value, thresholds[0], thresholds[1]);
+                    } else {
+                        sendReadNotification(value, thresholds);
                     }
                     GlumoApplication.db.insertGlucoseRead(value);
                     break;
@@ -131,7 +127,7 @@ public class BroadcastAndAlarmManager extends BroadcastReceiver {
                     ((AlarmManager) context.getSystemService(ALARM_SERVICE)).cancel(piSmsIntent);
 
                     // open the main activity
-                    Intent i1 = new Intent (context, MainActivity.class);
+                    Intent i1 = new Intent(context, MainActivity.class);
                     i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(i1);
 
@@ -157,46 +153,42 @@ public class BroadcastAndAlarmManager extends BroadcastReceiver {
 
 
     /**
-     *  This method builds up the notification whenever there was a read of the glucometer
-     *  @param value : the glucose read value
+     * This method builds up the notification whenever there was a read of the glucometer
+     *
+     * @param value : the glucose read value
      */
-    public static void sendReadNotification(int value, int undThr, int supThr){
-        if (MainActivity.currentFragmentClass != null) {
-            if (!HomeFragment.class.toString().equals(MainActivity.currentFragmentClass)) {
+    public static void sendReadNotification(int value, int[] thr) {
+        String currentFragment = (MainActivity.currentFragmentClass == null) ? "null" : MainActivity.currentFragmentClass;// TODO aggiunto
 
-                // get the notification builder and build the notification with its properties
-                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ctx)
-                        .setSmallIcon(R.mipmap.glumo_white)
-                        .setLargeIcon(BitmapFactory.decodeResource(ctx.getResources(), R.mipmap.glumo))
-                        .setContentTitle(GlumoApplication.getContext().getString(R.string.notification_read_value_title))
-                        .setContentText(String.valueOf(value))
-                        .setAutoCancel(true)
-                        .setPriority(Notification.PRIORITY_HIGH)
-                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        if (!HomeFragment.class.toString().equals(currentFragment)) {
 
-                // setting the light basing on the relative glucose value
-                int percentage = ((supThr - value) * 100) / (supThr - undThr);
-                if (percentage < 20 || percentage > 80)
-                    mBuilder.setLights(Color.RED, 500, 500);
-                else if (percentage > 40 && percentage < 60)
-                    mBuilder.setLights(Color.GREEN, 2000, 2000);
-                else
-                    mBuilder.setLights(Color.YELLOW, 1000, 1000);
+            // setting the light basing on the relative glucose value
+            int color = ContextCompat.getColor(ctx, Appearance.getColorBasedOnThresholds(value, thr));
 
+            // get the notification builder and build the notification with its properties
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ctx)
+                    .setSmallIcon(R.mipmap.glumo_white)
+                    .setLargeIcon(BitmapFactory.decodeResource(ctx.getResources(), R.mipmap.glumo))
+                    .setContentTitle(GlumoApplication.getContext().getString(R.string.notification_read_value_title))
+                    .setContentText(String.valueOf(value))
+                    .setAutoCancel(true)
+                    .setPriority(Notification.PRIORITY_HIGH)
+                    .setLights(color, 2000, 2000)
+                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 
-                // getting the NotificationManager and issue the just created notification
-                NotificationManager mNotifyMgr = (NotificationManager) ctx.getSystemService(ctx.NOTIFICATION_SERVICE);
-                mNotifyMgr.notify(GlumoApplication.ALARM_NOTIFICATION_ID, mBuilder.build());
-            }
+            // getting the NotificationManager and issue the just created notification
+            NotificationManager mNotifyMgr = (NotificationManager) ctx.getSystemService(ctx.NOTIFICATION_SERVICE);
+            mNotifyMgr.notify(GlumoApplication.ALARM_NOTIFICATION_ID, mBuilder.build());
         }
     }
 
 
     /**
-     *  This method builds up the alarm notification and issues it
-     *  @param notificationTitle : the notification title
-     *  @param notificationText : the notification text
-     *  @param alarm : has the alarm that will trigger if the user doesn't acknowledge the alarm in time to be set?
+     * This method builds up the alarm notification and issues it
+     *
+     * @param notificationTitle : the notification title
+     * @param notificationText  : the notification text
+     * @param alarm             : has the alarm that will trigger if the user doesn't acknowledge the alarm in time to be set?
      */
     private static void sendNotificationAndAlarm(String notificationTitle, String notificationText, final boolean alarm) {
 
@@ -235,18 +227,19 @@ public class BroadcastAndAlarmManager extends BroadcastReceiver {
 
 
     /**
-     *  This method checks the SMS permission and, if it has it, sends the alarm sms
-     *  @return true if the app has the permission or the sms alarm is enabled (and therefore an alarm SMS should be have sent), false otherwise or if there was an exception
+     * This method checks the SMS permission and, if it has it, sends the alarm sms
+     *
+     * @return true if the app has the permission or the sms alarm is enabled (and therefore an alarm SMS should be have sent), false otherwise or if there was an exception
      */
     private static boolean sendSMSAlarmMessage() {
         boolean hasPermission = false;
         // if the app has the permission AND the option is enabled
-        if (    ContextCompat.checkSelfPermission(ctx, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED &&
+        if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED &&
                 GlumoApplication.getBooleanPreference(R.string.alarm_SMS_switch_preference)) {
             try {
 
                 // if the number is not a number, throws exception
-                Integer.valueOf(GlumoApplication.getStringPreference(R.string.alarm_SMS_message_recipient_number_preference));
+                Long.valueOf(GlumoApplication.getStringPreference(R.string.alarm_SMS_message_recipient_number_preference));
 
                 SmsManager.getDefault().sendTextMessage(
                         GlumoApplication.getStringPreference(R.string.alarm_SMS_message_recipient_number_preference),
@@ -254,8 +247,7 @@ public class BroadcastAndAlarmManager extends BroadcastReceiver {
                         GlumoApplication.getStringPreference(R.string.alarm_SMS_message_default_text),
                         null, null);
                 hasPermission = true;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

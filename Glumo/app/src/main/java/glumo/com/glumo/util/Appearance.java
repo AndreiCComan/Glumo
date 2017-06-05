@@ -189,7 +189,7 @@ public class Appearance {
             color = R.color.AMETHYST;
         else if (percentage < 15 || percentage > 85)
             color = R.color.ALIZARIN;
-        else if (percentage < 35 && percentage > 75)
+        else if (percentage < 35 || percentage > 75)
             color = R.color.ORANGE;
         else
             color = R.color.TURQUOISE;

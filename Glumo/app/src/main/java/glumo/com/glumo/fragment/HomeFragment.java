@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment {
     private TextView minimumGlucoseLevel;
     private TextView maximumGlucoseLevel;
 
-    private UtilityCardView[] cardViews = new UtilityCardView [4];
+    private UtilityCardView[] cardViews = new UtilityCardView[4];
     private int cardAndPaddingHeight = 0;
     private LinearLayout cardViewWrapper;
 
@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
 
     private Context ctx = GlumoApplication.getContext();
 
-    private ValueAnimator animation = ValueAnimator.ofFloat(0,1);
+    private ValueAnimator animation = ValueAnimator.ofFloat(0, 1);
 
     private int themeColor;
 
@@ -90,6 +90,8 @@ public class HomeFragment extends Fragment {
     private boolean areWeUsingCachedData = false;
     private final String cachedDataKey = "cachedDataKey";
     private final String cachedDataArrayListKey = "cachedDataArrayListKey";
+
+    private boolean paused = false;
 
 
     @Override
@@ -124,7 +126,7 @@ public class HomeFragment extends Fragment {
                 0);
 
         cardViews[1] = new UtilityCardView(
-                ((CardView) ( view.findViewById(R.id.second_last_glucose_value_container)).getParent()),
+                ((CardView) (view.findViewById(R.id.second_last_glucose_value_container)).getParent()),
                 ((LinearLayout) view.findViewById(R.id.second_last_glucose_value_container)),
                 ((TextView) view.findViewById(R.id.second_last_glucose_value)),
                 ((ImageView) view.findViewById(R.id.second_last_glucose_value_arrow)),
@@ -132,7 +134,7 @@ public class HomeFragment extends Fragment {
                 0);
 
         cardViews[2] = new UtilityCardView(
-                ((CardView) ( view.findViewById(R.id.third_last_glucose_value_container)).getParent()),
+                ((CardView) (view.findViewById(R.id.third_last_glucose_value_container)).getParent()),
                 ((LinearLayout) view.findViewById(R.id.third_last_glucose_value_container)),
                 ((TextView) view.findViewById(R.id.third_last_glucose_value)),
                 ((ImageView) view.findViewById(R.id.third_last_glucose_value_arrow)),
@@ -140,7 +142,7 @@ public class HomeFragment extends Fragment {
                 0);
 
         cardViews[3] = new UtilityCardView(
-                ((CardView) ( view.findViewById(R.id.fourth_last_glucose_value_container)).getParent()),
+                ((CardView) (view.findViewById(R.id.fourth_last_glucose_value_container)).getParent()),
                 ((LinearLayout) view.findViewById(R.id.fourth_last_glucose_value_container)),
                 ((TextView) view.findViewById(R.id.fourth_last_glucose_value)),
                 ((ImageView) view.findViewById(R.id.fourth_last_glucose_value_arrow)),
@@ -157,11 +159,11 @@ public class HomeFragment extends Fragment {
         scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override
             public void onScrollChanged() {
-                if(MainActivity.currentFragmentClass.equals(HomeFragment.class.toString())){
+                if (MainActivity.currentFragmentClass.equals(HomeFragment.class.toString())) {
                     // get the difference
-                    if (scrollView.getScrollY() == frameLayout.getScrollY()){
+                    if (scrollView.getScrollY() == frameLayout.getScrollY()) {
                         Appearance.removeActionBarShadow();
-                    }else{
+                    } else {
                         Appearance.addActionBarShadow();
                     }
                 }
@@ -170,14 +172,14 @@ public class HomeFragment extends Fragment {
 
         // home scroll view
         ViewTreeObserver vto = view.findViewById(R.id.home_scroll_view).getViewTreeObserver();
-                vto.addOnGlobalLayoutListener (new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
                 view.findViewById(R.id.home_scroll_view).getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 cardViewWrapper = (LinearLayout) view.findViewById(R.id.glucose_value_cards_wrapper);
                 int cardHeight = cardViews[1].getGlucoseValueLayoutCardView().getMeasuredHeight();
                 int wrapperHeight = cardViewWrapper.getMeasuredHeight();
-                int cardPadding = (wrapperHeight - (3*cardHeight))/3;
+                int cardPadding = (wrapperHeight - (3 * cardHeight)) / 3;
                 UtilityCardView.setCardHeight(cardHeight);
                 UtilityCardView.setCardPadding(cardPadding);
                 cardAndPaddingHeight = cardHeight + cardPadding;
@@ -187,6 +189,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // associate the intent to the broadcast receiver for receiving the glucose read values
+        IntentFilter filters = new IntentFilter(GlumoApplication.BT_READ_GLUCOSE_R);
+        // register it
+        LocalBroadcastManager.getInstance(ctx).registerReceiver(localGlucoseReadIntentReceiver, filters);
+        // the fragment is not paused
+
         return view;
     }
 
@@ -194,10 +202,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        // associate the intent to the broadcast receiver for receiving the glucose read values
-        IntentFilter filters = new IntentFilter(GlumoApplication.BT_READ_GLUCOSE_R);
-        // register it
-        LocalBroadcastManager.getInstance(ctx).registerReceiver(localGlucoseReadIntentReceiver, filters);
+        paused = false;
     }
 
 
@@ -206,8 +211,8 @@ public class HomeFragment extends Fragment {
         // end the animation (if it was running)
         if (animation.isRunning())
             animation.end();
-        // unregister the localbroadcast manager
-        LocalBroadcastManager.getInstance(ctx).unregisterReceiver(localGlucoseReadIntentReceiver);
+        // the fragment is paused
+        paused = true;
         super.onPause();
     }
 
@@ -251,7 +256,7 @@ public class HomeFragment extends Fragment {
 
 
     //  This method updates all the interface after a glucose read (i.e.: last value, average-min-max, graphs, ...)
-    public void updateLayoutStaticValues () {
+    public void updateLayoutStaticValues() {
         boolean energySaveMode = (GlumoApplication.getBooleanPreference(R.string.energy_save_mode_switch_preference));
         JSONObject json;
 
@@ -259,24 +264,23 @@ public class HomeFragment extends Fragment {
         if (cachedData != null) {
             json = cachedData;
             areWeUsingCachedData = true;
-        }
-        else {
+        } else {
             json = GlumoApplication.db.getRangeOfGlucoseReads(1, true);
             cachedData = json;
             areWeUsingCachedData = false;
         }
 
         // values that have been set for hypoglycemia and hyperglicemia
-        int [] thresholds = {GlumoApplication.getIntPreference(R.string.hypoglycemia_preference), GlumoApplication.getIntPreference(R.string.hyperglycemia_preference)};
+        int[] thresholds = {GlumoApplication.getIntPreference(R.string.hypoglycemia_preference), GlumoApplication.getIntPreference(R.string.hyperglycemia_preference)};
 
         // if the json file contains data, extract the list of glucose reads
         if (json != null) {
             try {
                 List<GlucoseRead> list = (ArrayList<GlucoseRead>) json.get("list");
                 int list_size = list.size();
-                final GlucoseRead [] glucoseReads = new GlucoseRead[5];
-                final int [] startColors = new int[4];
-                final int [] endColors = new int[4];
+                final GlucoseRead[] glucoseReads = new GlucoseRead[5];
+                final int[] startColors = new int[4];
+                final int[] endColors = new int[4];
 
                 // if the energy save mode is off, swith cards
                 if (!energySaveMode) {
@@ -287,25 +291,24 @@ public class HomeFragment extends Fragment {
                 }
 
                 // get first 5 reads, empty reads if there are less than 5
-                for (int i = 0 ; i < 5 ; i++) {
+                for (int i = 0; i < 5; i++) {
                     glucoseReads[i] = (list_size > i ? list.get(i) : new GlucoseRead("0000-00-00 00:00:00", 0));
                 }
 
                 // handle arrow symbol: upwards if the values is incrementing, downwards if it's decrementing, horyzontal otherwise
-                for (int i = 0 ; i < 4 ; i++) {
+                for (int i = 0; i < 4; i++) {
 
                     ColorDrawable tempColor = ((ColorDrawable) (cardViews[i].getGlucoseValueLayout().getBackground()));
                     if (tempColor == null || tempColor.getColor() == 0) {
                         startColors[i] = themeColor;
-                    }
-                    else {
+                    } else {
                         startColors[i] = tempColor.getColor();
                     }
                     endColors[i] = ContextCompat.getColor(ctx, Appearance.getColorBasedOnThresholds(glucoseReads[i].getGlucose(), thresholds));
 
-                    if (glucoseReads[i].getGlucose() > glucoseReads[i+1].getGlucose())
+                    if (glucoseReads[i].getGlucose() > glucoseReads[i + 1].getGlucose())
                         cardViews[i].getGlucoseValueArrow().setRotation(-45);
-                    else if (glucoseReads[i].getGlucose() == glucoseReads[i+1].getGlucose())
+                    else if (glucoseReads[i].getGlucose() == glucoseReads[i + 1].getGlucose())
                         cardViews[i].getGlucoseValueArrow().setRotation(0);
                     else
                         cardViews[i].getGlucoseValueArrow().setRotation(45);
@@ -405,23 +408,24 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    /** this method inserts a pie charts containing the values set as parameters
+    /**
+     * this method inserts a pie charts containing the values set as parameters
      *
-     * @param normalValue normal value hits
-     * @param dangerValue danger value hits
+     * @param normalValue  normal value hits
+     * @param dangerValue  danger value hits
      * @param warningValue warning value hits
-     * @param hypoValue hypo value hits
-     * @param hyperValue hyper value hits
+     * @param hypoValue    hypo value hits
+     * @param hyperValue   hyper value hits
      */
-    private void insertPieChart(int normalValue, int dangerValue, int warningValue, int hypoValue, int hyperValue ) {
+    private void insertPieChart(int normalValue, int dangerValue, int warningValue, int hypoValue, int hyperValue) {
         pieChart = (PieChart) view.findViewById(R.id.pie_chart);
 
         // istantiating entries
-        PieEntry normalEntry = new PieEntry(normalValue, (normalValue != 0 ? "normal" : "") );
-        PieEntry dangerEntry = new PieEntry(dangerValue, (dangerValue != 0 ? "danger" : "") );
-        PieEntry warningEntry = new PieEntry(warningValue, (warningValue != 0 ? "warning" : "") );
-        PieEntry hypoEntry = new PieEntry(hypoValue, (hypoValue != 0 ? "hypo" : "") );
-        PieEntry hyperEntry = new PieEntry(hyperValue, (hyperValue != 0 ? "hyper" : "") );
+        PieEntry normalEntry = new PieEntry(normalValue, (normalValue != 0 ? "normal" : ""));
+        PieEntry dangerEntry = new PieEntry(dangerValue, (dangerValue != 0 ? "danger" : ""));
+        PieEntry warningEntry = new PieEntry(warningValue, (warningValue != 0 ? "warning" : ""));
+        PieEntry hypoEntry = new PieEntry(hypoValue, (hypoValue != 0 ? "hypo" : ""));
+        PieEntry hyperEntry = new PieEntry(hyperValue, (hyperValue != 0 ? "hyper" : ""));
 
         // adding entries to list
         ArrayList<PieEntry> entries = new ArrayList<>();
@@ -484,7 +488,7 @@ public class HomeFragment extends Fragment {
 
 
     // This class is a listener, which is invoked every time a read is performed
-    private BroadcastReceiver localGlucoseReadIntentReceiver= new BroadcastReceiver() {
+    private BroadcastReceiver localGlucoseReadIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
 
@@ -493,6 +497,10 @@ public class HomeFragment extends Fragment {
 
             // if action is a read of the glucose value,
             if (action.equals(GlumoApplication.BT_READ_GLUCOSE_R)) {
+                // set the glucose read request status to false
+                MainActivity.setIsGlucoseReadRequestSent(false);
+                // hide the loading wheel
+                MainActivity.hideWheel();
                 // if we already have some data to work with, just update 'em
                 if (cachedData != null) {
                     try {
@@ -505,8 +513,8 @@ public class HomeFragment extends Fragment {
                             cachedData.put("min", value);
                         int oldAverage = cachedData.getInt("average");  // updating average and cont
                         int oldCont = cachedData.getInt("cont");
-                        cachedData.put("average", ((oldAverage*oldCont) + (value)) / (oldCont+1));
-                        cachedData.put("cont", oldCont+1);
+                        cachedData.put("average", ((oldAverage * oldCont) + (value)) / (oldCont + 1));
+                        cachedData.put("cont", oldCont + 1);
 
                         // computing danger level on the basis of the value that has been read
                         String readDangerLevel = DBManager.getGlucoseDangerLevel(value);
@@ -518,23 +526,23 @@ public class HomeFragment extends Fragment {
                         switch (readDangerLevel) {
                             case "hyperglycemia":
                                 oldHitsValue = cachedData.getInt("hyperHits");
-                                cachedData.put("hyperHits", oldHitsValue+1);
+                                cachedData.put("hyperHits", oldHitsValue + 1);
                                 break;
                             case "hypoglycemia":
                                 oldHitsValue = cachedData.getInt("hypoHits");
-                                cachedData.put("hypoHits", oldHitsValue+1);
+                                cachedData.put("hypoHits", oldHitsValue + 1);
                                 break;
                             case "danger":
                                 oldHitsValue = cachedData.getInt("dangerHits");
-                                cachedData.put("dangerHits", oldHitsValue+1);
+                                cachedData.put("dangerHits", oldHitsValue + 1);
                                 break;
                             case "warning":
                                 oldHitsValue = cachedData.getInt("warningHits");
-                                cachedData.put("warningHits", oldHitsValue+1);
+                                cachedData.put("warningHits", oldHitsValue + 1);
                                 break;
                             case "normal":
                                 oldHitsValue = cachedData.getInt("normalHits");
-                                cachedData.put("normalHits", oldHitsValue+1);
+                                cachedData.put("normalHits", oldHitsValue + 1);
                                 break;
                         }
 
@@ -542,14 +550,13 @@ public class HomeFragment extends Fragment {
                         List<GlucoseRead> oldList = (List<GlucoseRead>) cachedData.get("list");
                         oldList.add(0, new GlucoseRead(DBManager.getCurrentTimestamp(), value));
                         cachedData.put("list", oldList);
-                        updateLayoutStaticValues();
                     } catch (JSONException e) {
                         e.printStackTrace();
                         handleException(e, "HOME_FRAGMENT", "localGlucoseReadIntentReceiver - format error in saved JSONObject");
                         cachedData = null;
                     }
                 }
-                else {
+                if (!paused) {
                     updateLayoutStaticValues();
                 }
             }
@@ -558,7 +565,7 @@ public class HomeFragment extends Fragment {
 
 
     // exception handler
-    private void handleException (Exception e, String tag, String message) {
+    private void handleException(Exception e, String tag, String message) {
         e.printStackTrace();
         Log.e(tag, message);
     }

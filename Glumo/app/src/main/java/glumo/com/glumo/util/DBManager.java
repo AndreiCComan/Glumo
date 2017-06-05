@@ -386,7 +386,7 @@ public class DBManager extends SQLiteOpenHelper{
             level = "hypoglycemia";
         else if (percentage < 15 || percentage > 85)
             level = "danger";
-        else if (percentage < 35 && percentage > 75)
+        else if (percentage < 35 || percentage > 75)
             level = "warning";
         else
             level = "normal";

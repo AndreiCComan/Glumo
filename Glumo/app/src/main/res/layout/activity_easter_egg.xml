@@ -8,6 +8,7 @@
     tools:context="glumo.com.glumo.activity.ChooseSensorActivity">
 
     <TextView
+        android:gravity="center"
         android:id="@+id/easter_egg_activity_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
