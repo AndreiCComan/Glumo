@@ -174,7 +174,7 @@ public final class BluetoothUtil extends IntentService {
             case GlumoApplication.BT_BLUETOOTH_OFF :            // CASE : THE BLUETOOTH IS OFF
                 if (action.equals(GlumoApplication.BT_READ_GLUCOSE)) {
                     incrementIntentUnsuccessfulTries(intent);   // increment the unsuccessful tries number is the intent was "BT_READ_GLUCOSE", in order to try it again
-                    try { Thread.sleep(command_interval); }                 // wait let the bluetooth activate
+                    try { Thread.sleep(command_interval); }     // wait let the bluetooth activate
                     catch (InterruptedException e) {}           // catch the exception by doing nothing (it's not so important)
                     BTIntent(intent);                           // re-send the intent
                 }

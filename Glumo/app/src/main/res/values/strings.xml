@@ -80,7 +80,7 @@
     <string name="emergency_message_decline">maybe later</string>
 
     <!-- Choose diabetes type activity section -->
-    <string name="choose_diabetes_type_activity_title">WHAT TYPE OF \n DIABETES DO YOU HAVE?</string>
+    <string name="choose_diabetes_type_activity_title">What type of \n diabetes do you have?</string>
     <string name="choose_diabetes_type_button">choose diabetes type</string>
     <string name="type_1_diabetes">Type 1 diabetes</string>
     <string name="type_2_diabetes">Type 2 diabetes</string>
@@ -88,11 +88,11 @@
 
     <!-- Choose sensor activity section-->
     <string name="choose_sensor_button">choose sensor</string>
-    <string name="choose_sensor_activity_title">CHOOSE YOUR SENSOR</string>
+    <string name="choose_sensor_activity_title">Choose your sensor</string>
     <string name="freestyle_libre">FreeStyle Libre</string>
 
     <!-- Choose thresholds activity section -->
-    <string name="choose_thresholds_activity_title">CHOOSE THRESHOLDS</string>
+    <string name="choose_thresholds_activity_title">Choose glycemic thresholds</string>
     <string name="choose_thresholds_button">choose thresholds</string>
     <string name="hyperglycemia_title">Hyperglycemia</string>
     <string name="hypoglycemia_title">Hypoglycemia</string>
@@ -108,7 +108,7 @@
     <string name="bluetooth_choose_device_no_paired_devices_alert">NO PAIRED DEVICES \n please go to system bluetooth settings and then pair your device. Eventually come back here, we\'ll wait you</string>
 
     <!-- end of first configurationactivity section -->
-    <string name="end_of_first_configuration_activity_title">WELL DONE!</string>
+    <string name="end_of_first_configuration_activity_title">Well done!</string>
     <string name="end_of_first_configuration_description">The configuration has been successfully completed \n\nEnjoy!</string>
     <string name="end_of_first_configuration_button">complete</string>
     <string name="hurray">Hurray!</string>
@@ -210,11 +210,12 @@
     <string name="items_in_list">items in list</string>
     <string name="clicks_to_easter_egg">more clicks to become a developer</string>
     <string name="grams_unit">g</string>
-    <string name="dialog_import_data_question">Are you sure about performing data recovery with this file?\nBy clicking "Yes" all previous content will be erased</string>
+    <string name="dialog_import_data_question">Are you sure about performing data recovery with this file?\nBy clicking "Yes" all previous content will be merged with the new dataset</string>
     <string name="dialog_import_data_confirm">Yes</string>
     <string name="dialog_import_data_decline">No</string>
     <string name="file_import_success">Success! Data has been correctly imported</string>
     <string name="file_import_fail">Error! File or data corrupted</string>
+    <string name="file_import_corrupted_or_already_present">Ok, but skipped some entries because already present or corrupted</string>
     <string name="file_export_success">Success! Data has been correctly exported</string>
     <string name="file_export_fail">Warning! Something went wrong with the export</string>
     <string name="no_csv_files_found">Warning! No CSV files found</string>

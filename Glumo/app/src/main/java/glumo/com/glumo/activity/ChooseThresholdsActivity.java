@@ -49,8 +49,8 @@ public class ChooseThresholdsActivity extends AppCompatActivity {
         hypoglycemiaWheelView.setItems(items);
 
         // Set start indexes for WheelViews
-        hyperglycemiaWheelView.selectIndex(18);
-        hypoglycemiaWheelView.selectIndex(4);
+        hyperglycemiaWheelView.selectIndex(14);
+        hypoglycemiaWheelView.selectIndex(6);
 
         // Get reference to the button
         final Button button = (Button) findViewById(R.id.choose_thresholds_button);

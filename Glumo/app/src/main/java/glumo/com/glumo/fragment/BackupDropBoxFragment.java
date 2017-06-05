@@ -538,7 +538,7 @@ public class BackupDropBoxFragment extends Fragment {
             if(result){
                 Toast.makeText(context, context.getString(R.string.file_import_success), Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(context, context.getString(R.string.file_import_fail), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getString(R.string.file_import_corrupted_or_already_present), Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -37,7 +37,6 @@ public class DBManager extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "glucoseData";
     private static final String TABLE_GLUCOSES = "glucoses";
-    private static final String KEY_ID = "id";
     private static final String KEY_TIME = "time";
     private static final String KEY_GLUCOSE = "glucose";
 
@@ -57,9 +56,9 @@ public class DBManager extends SQLiteOpenHelper{
         // building the table
         String CREATE_GLUCOSE_TABLE =
                 "CREATE TABLE " + TABLE_GLUCOSES + "("
-                        + KEY_ID + " INTEGER PRIMARY KEY,"
                         + KEY_TIME + " TEXT,"
-                        + KEY_GLUCOSE + " INTEGER"
+                        + KEY_GLUCOSE + " INTEGER,"
+                        + "PRIMARY KEY (" + KEY_TIME + "," + KEY_GLUCOSE + ")"
                         + ")";
         db.execSQL(CREATE_GLUCOSE_TABLE);
     }
@@ -95,6 +94,10 @@ public class DBManager extends SQLiteOpenHelper{
      *  @return boolean : was the operation successful?
      */
     public boolean insertGlucoseReads(ArrayList<String[]> data){
+
+        // the value to be returned
+        boolean returningValue = true;
+
         // getting the writable database object
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -110,24 +113,16 @@ public class DBManager extends SQLiteOpenHelper{
         }
 
         try {
-
-            db.beginTransaction();
-            // delete all the entries
-            deleteAllEntries();
             // import the new entries
             db.execSQL(query);
-            // success?
-            db.setTransactionSuccessful();
-
         }
+        // catch if data corrupted or already present
         catch (Exception e) {
             e.printStackTrace();
-            return false;
+            returningValue = false;
         }
-        finally {
-            db.endTransaction();
-        }
-        return true;
+
+        return returningValue;
     }
 
 
@@ -182,7 +177,7 @@ public class DBManager extends SQLiteOpenHelper{
 
         while(cursor.moveToNext()){
             // array made of glucose time and glucose read value
-            String [] tempString = {cursor.getString(1), cursor.getString(2)};
+            String [] tempString = {cursor.getString(0), cursor.getString(1)};
             dbData.add(tempString);
         }
         // closing the cursors
@@ -283,7 +278,7 @@ public class DBManager extends SQLiteOpenHelper{
             if (cursor.moveToFirst()) {
                 do {
                     // elaborating min - max - average glucose values
-                    tempValue = cursor.getInt(2);
+                    tempValue = cursor.getInt(1);
                     if (extras) {
                         if (tempValue < min || min == -1)
                             min = tempValue;
@@ -317,7 +312,7 @@ public class DBManager extends SQLiteOpenHelper{
 
                     // setting the glucose read values and adding to the list
                     GlucoseRead read = new GlucoseRead();
-                    read.setTime(cursor.getString(1));
+                    read.setTime(cursor.getString(0));
                     read.setGlucose(tempValue);
                     readList.add(read);
                 } while (cursor.moveToNext());
@@ -434,7 +429,7 @@ public class DBManager extends SQLiteOpenHelper{
         }
 
         // creating the new empty file adding the timestamp to its name
-        String timestamp = getCurrentTimestamp("yyyy MMM EE HH:mm:ss");
+        String timestamp = getCurrentTimestamp("yyyy MMM dd HH:mm:ss");
         String fileName = "glucoses " + timestamp + ".csv";
         File file = new File(exportDir, fileName);
 

@@ -207,7 +207,7 @@ public class BackupLocalStorageFragment extends Fragment {
                     if(result){
                         Toast.makeText(GlumoApplication.getContext(), context.getString(R.string.file_import_success), Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(GlumoApplication.getContext(), context.getString(R.string.file_import_fail), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GlumoApplication.getContext(), context.getString(R.string.file_import_corrupted_or_already_present), Toast.LENGTH_SHORT).show();
                     }
                 }
             }

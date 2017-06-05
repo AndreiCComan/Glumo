@@ -440,10 +440,10 @@ public class HomeFragment extends Fragment {
 
         // setting colors for the chart
         dataSet.setColors(ContextCompat.getColor(getActivity(), R.color.TURQUOISE),
-                ContextCompat.getColor(getActivity(), R.color.ALIZARIN),
+                ContextCompat.getColor(getActivity(), R.color.CARROT),
                 ContextCompat.getColor(getActivity(), R.color.ORANGE),
-                ContextCompat.getColor(getActivity(), R.color.AMETHYST),
-                ContextCompat.getColor(getActivity(), R.color.WISTERIA));
+                ContextCompat.getColor(getActivity(), R.color.ALIZARIN),
+                ContextCompat.getColor(getActivity(), R.color.POMEGRANATE));
         PieData data = new PieData(dataSet);
 
         // graphical settings for the text of the value

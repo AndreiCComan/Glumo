@@ -400,10 +400,10 @@ public class AnalysisFragment extends Fragment {
         // generating dataset with the list, and associating colors to it
         PieDataSet dataSet = new PieDataSet(entries, "");
         dataSet.setColors(ContextCompat.getColor(getActivity(), R.color.TURQUOISE),
-                ContextCompat.getColor(getActivity(), R.color.ALIZARIN),
+                ContextCompat.getColor(getActivity(), R.color.CARROT),
                 ContextCompat.getColor(getActivity(), R.color.ORANGE),
-                ContextCompat.getColor(getActivity(), R.color.AMETHYST),
-                ContextCompat.getColor(getActivity(), R.color.WISTERIA));
+                ContextCompat.getColor(getActivity(), R.color.ALIZARIN),
+                ContextCompat.getColor(getActivity(), R.color.POMEGRANATE));
         PieData data = new PieData(dataSet);
 
         // text graphical features
@@ -487,8 +487,8 @@ public class AnalysisFragment extends Fragment {
         lineChart.getXAxis().setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return "";          // for now, just return ""
-                /*String tempAxisValue = sdf2.format(new Date(((long) value)));
+
+                String tempAxisValue = sdf2.format(new Date(((long) value)));
                 if ( dateAxisCutLevel == -1 ) {
                     firstTwoDateInGraphAxis = true;
                     dateAxisCutLevel = 0;
@@ -539,7 +539,7 @@ public class AnalysisFragment extends Fragment {
                     tempAxisValue = tempAxisValue.substring(dateAxisCutLevel);
                 }
                 return tempAxisValue;
-                */
+
             }
         });
 

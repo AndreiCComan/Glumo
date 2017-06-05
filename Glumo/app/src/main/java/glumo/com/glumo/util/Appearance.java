@@ -178,7 +178,7 @@ public class Appearance {
      *  This util method takes the glucose value and return the relevant color
      *  @param glucoseValue : the glucose value. 0 if there is not a value yet
      *  @param thresholds : hyperglycemia and hypoglycemia thresholds
-     *  @return color : amethyst - red - orange - green - silver
+     *  @return color : Alizarin (red) - Carrot (dark orange) - orange - Turquoise (green) - silver
      */
     public static int getColorBasedOnThresholds(int glucoseValue, int[] thresholds) {
         int color;
@@ -186,9 +186,9 @@ public class Appearance {
         if (glucoseValue == 0)
             color = R.color.SILVER;
         else if (percentage < 0 || percentage > 100)
-            color = R.color.AMETHYST;
-        else if (percentage < 15 || percentage > 85)
             color = R.color.ALIZARIN;
+        else if (percentage < 15 || percentage > 85)
+            color = R.color.CARROT;
         else if (percentage < 35 || percentage > 75)
             color = R.color.ORANGE;
         else
