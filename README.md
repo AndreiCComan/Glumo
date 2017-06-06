@@ -19,7 +19,7 @@ Glumo is meant to be a tool of support for people who suffer from diabetes, prov
 Our solution consists of an app that provides a user-friendly representation of glucose readings, by asynchronously polling the sensor via Bluetooth connection. Moreover, the app offers functionalities such as acoustic alarms for notifying the trespassing of glycemic thresholds, emergency SMS messages in case of not acknowledged danger values, graphical representation of the history, export and import of data, bolus calculus and check upon carbohydrates levels in food.
 
 #### Screenshots
-<br>
+
 ![Application screenshots](./repo_resources/screenshots.png)
 
 #### Arduino wiring
